@@ -1,0 +1,81 @@
+<odoo>
+  <data>
+
+ <!-- ====== Company Configuration ====== -->
+    <record id="res_partner" model="ir.ui.view">
+        <field name="name">res.contact.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="cbeds" />
+                <field name="tbeds" />
+                <field name="vents" />
+                <field name="meds" />
+                <field name="ask" />
+                <field name="contact_type" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="jkc_module.list">
+      <field name="name">jkc_module list</field>
+      <field name="model">jkc_module</field>
+      <field name="arch" type="xml">
+       <form string="Crop">
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </form>
+      </field>
+    </record>
+   
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="jkc_module.action_window">
+      <field name="name">jkc_module window</field>
+      <field name="res_model">jkc_module</field>
+      <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="jkc_module.list"/>
+
+    </record>
+   
+
+    <!-- server action to the one above -->
+    
+    <record model="ir.actions.server" id="jkc_module.action_server">
+      <field name="name">jkc_module server</field>
+      <field name="model_id" ref="model_jkc_module"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   
+
+    <!-- Top menu item -->
+    
+    <menuitem name="jkc_module" id="jkc_module.menu_root"/>
+   
+    <!-- menu categories -->
+    
+    <menuitem name="Hospital Info" id="jkc_module.menu_1" parent="jkc_module.menu_root"/>
+    <menuitem name="Help line info" id="jkc_module.menu_2" parent="jkc_module.menu_root"/>
+   
+    <!-- actions -->
+    
+    <menuitem name="List" id="jkc_module.menu_1_list" parent="jkc_module.menu_1"
+              action="jkc_module.action_window"/>
+    <menuitem name="Server to list" id="jkc_module" parent="jkc_module.menu_2"
+              action="jkc_module.action_server"/>
+
+  </data>
+</odoo>
