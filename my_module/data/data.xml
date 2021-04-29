@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+          
+          <record id="menu_ctestcenter_form" model="website.menu">
+                  <field name="name">Covid test center</field>
+                  <field name="url">/covidtestcenter/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          
+
+          <record id="menu_tribulance_form" model="website.menu">
+                  <field name="name">Tribulance</field>
+                  <field name="url">/tribulance/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          
+          <record id="menu_partner_form" model="website.menu">
+                  <field name="name">Patients</field>
+                  <field name="url">/patient/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          
+          <record id="menu_hosp_form" model="website.menu">
+                  <field name="name">Hospital</field>
+                  <field name="url">/hospital/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+        <record id="menu_funeral_form" model="website.menu">
+                  <field name="name">Funeral Service</field>
+                  <field name="url">/funeralservice/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+        </record>
+    </data>
+</odoo>

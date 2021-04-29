@@ -1,0 +1,523 @@
+<odoo>
+    <data>
+        <template id="listing"> 
+          <ul> 
+            <li t-foreach="objects" t-as="object"> 
+              <a t-attf-href="#{ root }/objects/#{ object.name }"> 
+                <t t-esc="object.display_name"/> 
+              </a> 
+            </li> 
+          </ul> 
+        </template> 
+        <template id="object"> 
+          <h1><t t-esc="object.display_name"/></h1> 
+          <dl> 
+            <t t-foreach="object._fields" t-as="field"> 
+              <dt><t t-esc="field"/></dt> 
+              <dd><t t-esc="object[field]"/></dd> 
+            </t> 
+          </dl> 
+          </template>
+        <template id="tmp_hospital_form" name="Partner Form">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form action="/hospital/form/submit">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" name="name" id="name" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" name="email" id="email" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required="true" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="location">Location:</label>
+                                        <input type="location" class="form-control" name="location" id="location" required="true" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="cbeds">Covid Beds:</label>
+                                        <input type="cbeds" class="form-control" name="cbeds" id="cbeds" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tbeds">Todal Beds:</label>
+                                        <input type="tbeds" class="form-control" name="tbeds" id="tbeds" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vent">Ventilators:</label>
+                                        <input type="vent" class="form-control" name="vent" id="vent" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meds">Covid treatment medicine stock:</label>
+                                        <input type="meds" class="form-control" name="meds" id="meds" required="true" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </t>
+            </template>
+            
+
+        <template id="tmp_hospital_form_success" name="hospital Form Successfully Submitted">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                hospital created successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+       <template id="hospital_index">
+          <t t-call="website.layout">
+          <div class="container">
+
+            <table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+              <h3>Hospital details</h3>
+              <thead>
+                <tr style="background:#DCDCDC">
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Name</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Location</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Email</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Phone</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Ventilators</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Covid Beds</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Total Beds</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Remdesivir Stock</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="color: #D8F0DA background: transparent">
+                <tr t-foreach="teachers" t-as="l">
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.name"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.street"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.email"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.phone"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.vents"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.cbeds"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.tbeds"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.meds"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </t>
+        </template>
+
+
+
+
+        
+        <template id="tmp_patient_form" name="patient Form">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form action="/patient/form/submit">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" name="name" id="name" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" name="email" id="email" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Location:</label>
+                                        <input type="text" class="form-control" name="location" id="location" required="true" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">What is the ask?</label>
+                                        <input type="text" class="form-control" name="ask" id="ask" required="true" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </t>
+            </template>
+            
+
+        <template id="tmp_patient_form_success" name="patient Form Successfully Submitted">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                patient created successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+       <template id="patient_index">
+          <t t-call="website.layout">
+           <div class="container">
+            <table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+              <h3>Patient details</h3>
+              <thead>
+                <tr style="background:#DCDCDC">
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Name</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Location</strong>
+                  </th>                  
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Phone</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>What is needed?</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="color: #D8F0DA background: transparent">
+                <tr t-foreach="teachers" t-as="l">
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.name"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.street"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.phone"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.ask"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </t>
+        </template>
+
+<!-- ##################### -->
+
+
+        <template id="tmp_tribulance_form" name="tribulance Form">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form action="/tribulance/form/submit">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" name="name" id="name" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" name="email" id="email" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Vehicle Number:</label>
+                                        <input type="text" class="form-control" name="location" id="location" required="true" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </t>
+            </template>
+            
+
+        <template id="tmp_tribulance_form_success" name="tribulance Form Successfully Submitted">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                tribulance created successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+       <template id="tribulance_index">
+          <t t-call="website.layout">
+            <div class="container">
+            <table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+              <h3>Tribulance details</h3>
+              <thead>
+                <tr style="background:#DCDCDC">
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Name</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Vehicle Number</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Email</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Phone</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="color: #D8F0DA background: transparent">
+                <tr t-foreach="teachers" t-as="l">
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.name"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.street"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.email"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.phone"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </t>
+        </template>
+
+<!-- ################################# -->
+
+        <template id="tmp_covidtestcenter_form" name="covidtestcenter Form">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form action="/covidtestcenter/form/submit">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" name="name" id="name" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" name="email" id="email" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Location:</label>
+                                        <input type="text" class="form-control" name="location" id="location" required="true" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </t>
+            </template>
+            
+
+        <template id="tmp_covidtestcenter_form_success" name="covidtestcenter Form Successfully Submitted">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                covidtestcenter created successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+       <template id="covidtestcenter_index">
+          <t t-call="website.layout">
+            <div class="container">
+            <table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+              <h3>Convid test centers details</h3>
+              <thead>
+                <tr style="background:#DCDCDC">
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Name</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Location</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Email</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Phone</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="color: #D8F0DA background: transparent">
+                <tr t-foreach="teachers" t-as="l">
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.name"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.street"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.email"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.phone"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </t>
+        </template>
+
+
+<!-- ################################# -->
+
+        <template id="tmp_funeralservice_form" name="funeralservice Form">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form action="/funeralservice/form/submit">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" name="name" id="name" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" name="email" id="email" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Location:</label>
+                                        <input type="text" class="form-control" name="location" id="location" required="true" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </t>
+            </template>
+            
+
+        <template id="tmp_funeralservice_form_success" name="funeralservice Form Successfully Submitted">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                funeralservice created successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+       <template id="funeralservice_index">
+          <t t-call="website.layout">
+            <div class="container">
+            <table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+              <h3>Convid test centers details</h3>
+              <thead>
+                <tr style="background:#DCDCDC">
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Name</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Location</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Email</strong>
+                  </th>
+                  <th class="text-left" style="border: 1px solid black;">
+                    <strong>Phone</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="color: #D8F0DA background: transparent">
+                <tr t-foreach="teachers" t-as="l">
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.name"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.street"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.email"/>
+                  </td>
+                  <td class="text-left" style="border: 1px solid black;">
+                    <span t-field="l.phone"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </t>
+        </template>
+
+    </data>
+</odoo>
