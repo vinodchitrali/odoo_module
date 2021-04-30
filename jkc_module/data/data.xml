@@ -1,6 +1,52 @@
 <odoo>
     <data>
-          
+          <record id="menu_plasmadonor_form" model="website.menu">
+                  <field name="name">Plasma Donors</field>
+                  <field name="url">/plasmadonor/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+          <record id="menu_wasteandsan_form" model="website.menu">
+                  <field name="name">Waste disposal and sanatisation centre</field>
+                  <field name="url">/wasteandsan/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+          <record id="menu_vaccine_form" model="website.menu">
+                  <field name="name">Vaccination centre</field>
+                  <field name="url">/vaccine/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+          <record id="menu_pharmacy_form" model="website.menu">
+                  <field name="name">Pharmacy</field>
+                  <field name="url">/pharmacy/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+          <record id="menu_food_form" model="website.menu">
+                  <field name="name">Food and Grocery</field>
+                  <field name="url">/food/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+
+          <record id="menu_oxygen_form" model="website.menu">
+                  <field name="name">Oxygen</field>
+                  <field name="url">/oxygen/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          <record id="menu_doctors_form" model="website.menu">
+                  <field name="name">Physician</field>
+                  <field name="url">/physician/form</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">22</field>
+          </record>          
           <record id="menu_ctestcenter_form" model="website.menu">
                   <field name="name">Covid test center</field>
                   <field name="url">/covidtestcenter/form</field>
@@ -9,9 +55,9 @@
           </record>
           
 
-          <record id="menu_tribulance_form" model="website.menu">
-                  <field name="name">Tribulance</field>
-                  <field name="url">/tribulance/form</field>
+          <record id="menu_triambulance_form" model="website.menu">
+                  <field name="name">Triambulance</field>
+                  <field name="url">/triambulance/form</field>
                   <field name="parent_id" ref="website.main_menu"/>
                   <field name="sequence" type="int">22</field>
           </record>
