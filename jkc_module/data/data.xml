@@ -1,56 +1,62 @@
 <odoo>
     <data>
+        <record id="menu_admin_form" model="website.menu">
+                  <field name="name">Admin</field>
+                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">80</field>
+          </record>
+
           <record id="menu_plasmadonor_form" model="website.menu">
                   <field name="name">Plasma Donors</field>
                   <field name="url">/plasmadonor/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
           <record id="menu_wasteandsan_form" model="website.menu">
                   <field name="name">Waste disposal and sanatisation centre</field>
                   <field name="url">/wasteandsan/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
           <record id="menu_vaccine_form" model="website.menu">
                   <field name="name">Vaccination centre</field>
                   <field name="url">/vaccine/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
           <record id="menu_pharmacy_form" model="website.menu">
                   <field name="name">Pharmacy</field>
                   <field name="url">/pharmacy/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
           <record id="menu_food_form" model="website.menu">
                   <field name="name">Food and Grocery</field>
                   <field name="url">/food/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
           <record id="menu_oxygen_form" model="website.menu">
                   <field name="name">Oxygen</field>
                   <field name="url">/oxygen/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
           <record id="menu_doctors_form" model="website.menu">
                   <field name="name">Physician</field>
                   <field name="url">/physician/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>          
           <record id="menu_ctestcenter_form" model="website.menu">
                   <field name="name">Covid test center</field>
                   <field name="url">/covidtestcenter/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
           
@@ -58,28 +64,28 @@
           <record id="menu_triambulance_form" model="website.menu">
                   <field name="name">Triambulance</field>
                   <field name="url">/triambulance/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
           
           <record id="menu_partner_form" model="website.menu">
                   <field name="name">Patients</field>
                   <field name="url">/patient/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
           
           <record id="menu_hosp_form" model="website.menu">
                   <field name="name">Hospital</field>
                   <field name="url">/hospital/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>
 
         <record id="menu_funeral_form" model="website.menu">
                   <field name="name">Funeral Service</field>
                   <field name="url">/funeralservice/form</field>
-                  <field name="parent_id" ref="website.main_menu"/>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
         </record>
     </data>
