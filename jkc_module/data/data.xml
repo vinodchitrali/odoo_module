@@ -1,8 +1,49 @@
 <odoo>
     <data>
-        <record id="menu_admin_form" model="website.menu">
+
+          <record id="menu_admin_form" model="website.menu">
                   <field name="name">Admin</field>
                   <field name="parent_id" ref="website.main_menu"/>
+                  <field name="sequence" type="int">80</field>
+          </record>
+          <record id="menu_rat_form" model="website.menu">
+                  <field name="name">RAT Test Centers</field>
+                  <field name="url">/rat/form</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          <record id="menu_oxra_form" model="website.menu">
+                  <field name="name">Oxygen and Remdesivir</field>
+                  <field name="url">/oxra/form</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          <record id="menu_isolation_form" model="website.menu">
+                  <field name="name">Isolation Centers</field>
+                  <field name="url">/isolation/form</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">22</field>
+          </record>    
+          <record id="menu_hrct_form" model="website.menu">
+                  <field name="name">HRCT Test Centers</field>
+                  <field name="url">/hrct/form</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">22</field>
+          </record>
+          <record id="menu_hdoctors_form" model="website.menu">
+                  <field name="name">Doctors for home isolation</field>
+                  <field name="url">/hphysician/form</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">22</field>
+          </record>     
+          <record id="menu_bloodinv_form" model="website.menu">
+                  <field name="name">Blood Investigation Labs</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
+                  <field name="sequence" type="int">80</field>
+          </record>
+          <record id="menu_dccontact_form" model="website.menu">
+                  <field name="name">District Emergency Contacts</field>
+                  <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">80</field>
           </record>
 
@@ -48,7 +89,7 @@
                   <field name="sequence" type="int">22</field>
           </record>
           <record id="menu_doctors_form" model="website.menu">
-                  <field name="name">Physician</field>
+                  <field name="name">Doctors on call</field>
                   <field name="url">/physician/form</field>
                   <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
@@ -61,9 +102,9 @@
           </record>
           
 
-          <record id="menu_triambulance_form" model="website.menu">
-                  <field name="name">Triambulance</field>
-                  <field name="url">/triambulance/form</field>
+          <record id="menu_ambulance_form" model="website.menu">
+                  <field name="name">Ambulance</field>
+                  <field name="url">/ambulance/form</field>
                   <field name="parent_id" ref="jkc_module.menu_admin_form"/>
                   <field name="sequence" type="int">22</field>
           </record>

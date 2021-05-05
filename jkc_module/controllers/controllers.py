@@ -139,14 +139,14 @@ class PatientForm(http.Controller):
 
 
 
-class TriambulanceInformation(http.Controller):
+class AmbulanceInformation(http.Controller):
 
-    @http.route(['/triambulance/form'], type='http', auth="user", website=True)
+    @http.route(['/ambulance/form'], type='http', auth="user", website=True)
     def partner_form(self, **post):
-        return request.render("jkc_module.tmp_triambulance_form", {})
+        return request.render("jkc_module.tmp_ambulance_form", {})
 
-    @http.route(['/triambulance/form/submit'], type='http', auth="user", website=True)
-    def triambulance_form_submit(self, post_id="", **post):
+    @http.route(['/ambulance/form/submit'], type='http', auth="user", website=True)
+    def ambulance_form_submit(self, post_id="", **post):
         
         if post_id!="":
             # then its edit mode
@@ -162,34 +162,34 @@ class TriambulanceInformation(http.Controller):
             vals = {
                         'partner': partner,
             }
-            return request.render("jkc_module.tmp_triambulance_form_success", vals)
+            return request.render("jkc_module.tmp_ambulance_form_success", vals)
 
         partner = request.env['res.partner'].create({
             'name': post.get('name'),
             'email': post.get('email'),
             'phone': post.get('phone'),
             'street': post.get('location'),
-            'contact_type': 'triambulance'
+            'contact_type': 'ambulance'
 
         })
         vals = {
             'partner': partner,
         }
-        return request.render("jkc_module.tmp_triambulance_form_success", vals)
+        return request.render("jkc_module.tmp_ambulance_form_success", vals)
 
-    @http.route(['/gettriambulance'], type='http', auth="public", website=True)
-    def triambulance_partner_form(self, **post):
+    @http.route(['/getambulance'], type='http', auth="public", website=True)
+    def ambulance_partner_form(self, **post):
         Teachers = http.request.env['res.partner']
-        return http.request.render('jkc_module.triambulance_index', {
-            'teachers': Teachers.sudo().search([('contact_type', '=', 'triambulance')])
+        return http.request.render('jkc_module.ambulance_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'ambulance')])
         })
 
 
-    @http.route(['/edittriambulance'], type='http', auth="user", website=True)
-    def edit_triambulance(self, post_id="", **post):
+    @http.route(['/editambulance'], type='http', auth="user", website=True)
+    def edit_ambulance(self, post_id="", **post):
         Teachers = http.request.env['res.partner']
-        return http.request.render('jkc_module.tmp_triambulance_form', {
-            'teacher': Teachers.search([('contact_type', '=', 'triambulance'), ('id', '=', post_id)])[0]
+        return http.request.render('jkc_module.tmp_ambulance_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'ambulance'), ('id', '=', post_id)])[0]
         })
         
         
@@ -687,3 +687,414 @@ class PlasmaDonorForm(http.Controller):
         return http.request.render('jkc_module.tmp_plasmadonor_form', {
             'teacher': Teachers.search([('contact_type', '=', 'plasmadonor'), ('id', '=', post_id)])[0]
         })
+
+
+
+class BloodInvestigationForm(http.Controller):
+
+    @http.route(['/bloodinvestigation/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_bloodinvestigation_form", {})
+
+    @http.route(['/bloodinvestigation/form/submit'], type='http', auth="user", website=True)
+    def bloodinvestigation_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_bloodinvestigation_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'bloodinvestigation'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_bloodinvestigation_form_success", vals)
+
+    @http.route(['/getbloodinvestigation'], type='http', auth="public", website=True)
+    def bloodinvestigation_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.bloodinvestigation_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'bloodinvestigation')])
+        })
+
+    @http.route(['/editbloodinvestigation'], type='http', auth="user", website=True)
+    def edit_bloodinvestigation(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_bloodinvestigation_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'bloodinvestigation'), ('id', '=', post_id)])[0]
+        })
+
+
+
+class DistrictEmergencyContactsForm(http.Controller):
+
+    @http.route(['/emergencycontacts/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_emergencycontacts_form", {})
+
+    @http.route(['/emergencycontacts/form/submit'], type='http', auth="user", website=True)
+    def emergencycontacts_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_emergencycontacts_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'emergencycontacts'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_emergencycontacts_form_success", vals)
+
+    @http.route(['/getemergencycontacts'], type='http', auth="public", website=True)
+    def emergencycontacts_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.emergencycontacts_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'emergencycontacts')])
+        })
+
+    @http.route(['/editemergencycontacts'], type='http', auth="user", website=True)
+    def edit_emergencycontacts(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_emergencycontacts_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'emergencycontacts'), ('id', '=', post_id)])[0]
+        })
+
+
+
+class HPhysicianForm(http.Controller):
+
+    @http.route(['/hphysician/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_hphysician_form", {})
+
+    @http.route(['/hphysician/form/submit'], type='http', auth="user", website=True)
+    def hphysician_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_hphysician_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'hphysician'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_hphysician_form_success", vals)
+
+    @http.route(['/gethphysician'], type='http', auth="public", website=True)
+    def hphysician_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.hphysician_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'hphysician')])
+        })
+
+    @http.route(['/edithphysician'], type='http', auth="user", website=True)
+    def edit_hphysician(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_hphysician_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'hphysician'), ('id', '=', post_id)])[0]
+        })
+    
+        
+        
+
+
+
+
+class HRCTForm(http.Controller):
+
+    @http.route(['/hrct/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_hrct_form", {})
+
+    @http.route(['/hrct/form/submit'], type='http', auth="user", website=True)
+    def hrct_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_hrct_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'hrct'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_hrct_form_success", vals)
+
+    @http.route(['/gethrct'], type='http', auth="public", website=True)
+    def hrct_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.hrct_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'hrct')])
+        })
+
+    @http.route(['/edithrct'], type='http', auth="user", website=True)
+    def edit_hrct(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_hrct_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'hrct'), ('id', '=', post_id)])[0]
+        })
+    
+        
+        
+
+class IsolationForm(http.Controller):
+
+    @http.route(['/isolation/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_isolation_form", {})
+
+    @http.route(['/isolation/form/submit'], type='http', auth="user", website=True)
+    def isolation_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_isolation_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'isolation'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_isolation_form_success", vals)
+
+    @http.route(['/getisolation'], type='http', auth="public", website=True)
+    def isolation_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.isolation_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'isolation')])
+        })
+
+    @http.route(['/editisolation'], type='http', auth="user", website=True)
+    def edit_isolation(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_isolation_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'isolation'), ('id', '=', post_id)])[0]
+        })
+    
+        
+        
+
+
+class OXYRAForm(http.Controller):
+
+    @http.route(['/oxra/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_oxra_form", {})
+
+    @http.route(['/oxra/form/submit'], type='http', auth="user", website=True)
+    def oxra_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_oxra_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'oxra'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_oxra_form_success", vals)
+
+    @http.route(['/getoxra'], type='http', auth="public", website=True)
+    def oxra_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.oxra_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'oxra')])
+        })
+
+    @http.route(['/editoxra'], type='http', auth="user", website=True)
+    def edit_oxra(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_oxra_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'oxra'), ('id', '=', post_id)])[0]
+        })
+    
+        
+        
+
+
+class RATForm(http.Controller):
+
+    @http.route(['/rat/form'], type='http', auth="user", website=True)
+    def partner_form(self, **post):
+        return request.render("jkc_module.tmp_rat_form", {})
+
+    @http.route(['/rat/form/submit'], type='http', auth="user", website=True)
+    def rat_form_submit(self, post_id="", **post):        
+        if post_id!="":
+            # then its edit mode
+            Teachers = http.request.env['res.partner']        
+            partner = Teachers.search([('id', '=', post_id)])[0]
+            partner.update({
+                'name': post.get('name'),
+                'email': post.get('email'),
+                'phone': post.get('phone'),
+                'street': post.get('location'),
+                'ask': post.get('ask'),
+
+            })
+            vals = {
+                'partner': partner,
+            }
+            return request.render("jkc_module.tmp_rat_form_success", vals)
+                
+                
+                
+        partner = request.env['res.partner'].create({
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'phone': post.get('phone'),
+            'street': post.get('location'),
+            'ask': post.get('ask'),
+            'contact_type': 'rat'
+
+        })
+        vals = {
+            'partner': partner,
+        }
+        return request.render("jkc_module.tmp_rat_form_success", vals)
+
+    @http.route(['/getrat'], type='http', auth="public", website=True)
+    def rat_partner_form(self, **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.rat_index', {
+            'teachers': Teachers.sudo().search([('contact_type', '=', 'rat')])
+        })
+
+    @http.route(['/editrat'], type='http', auth="user", website=True)
+    def edit_rat(self, post_id="", **post):
+        Teachers = http.request.env['res.partner']
+        return http.request.render('jkc_module.tmp_rat_form', {
+            'teacher': Teachers.search([('contact_type', '=', 'rat'), ('id', '=', post_id)])[0]
+        })
+    
+        
+        

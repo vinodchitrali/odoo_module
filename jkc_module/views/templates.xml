@@ -135,17 +135,21 @@
 			</t>
 		</template>
 		<template id="tmp_hospital_form_success" name="hospital Form Successfully Submitted">
-			<t t-call="website.layout">
-				<div id="wrap">
-					<div class="container">
-						<div class="col-md-12">
-							<div class="alert alert-success">
-								hospital created successfully.
-							</div>
-						</div>
-					</div>
-				</div>
-			</t>
+			<html>
+				<head>
+					<title>Custom React Todo</title>
+					<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+					<meta http-equiv="content-type" content="text/html, charset=utf-8" />               
+				</head>
+				<body>
+					<div class="o_main_content" id="todos-example"/>
+				</body>
+
+				<script src="https://unpkg.com/react@16/umd/react.development.js" ></script>
+				<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" ></script>
+					
+				<t t-call-assets="todo.assets"/>
+			</html>
 		</template>
 		<template id="hospital_index">
 			<t t-call="website.layout">
@@ -394,12 +398,12 @@
 			</t>
 		</template>
 		<!-- ##################### -->
-		<template id="tmp_triambulance_form" name="triambulance Form">
+		<template id="tmp_ambulance_form" name="ambulance Form">
 			<t t-call="website.layout">
 				<div id="wrap">
 					<div class="container">
 						<div class="col-md-12">
-							<form action="/triambulance/form/submit">
+							<form action="/ambulance/form/submit">
 								<div class="form-group">
 									<label for="name">
 										Name:
@@ -460,25 +464,25 @@
 				</div>
 			</t>
 		</template>
-		<template id="tmp_triambulance_form_success" name="triambulance Form Successfully Submitted">
+		<template id="tmp_ambulance_form_success" name="ambulance Form Successfully Submitted">
 			<t t-call="website.layout">
 				<div id="wrap">
 					<div class="container">
 						<div class="col-md-12">
 							<div class="alert alert-success">
-								Triambulance created successfully.
+								Ambulance created successfully.
 							</div>
 						</div>
 					</div>
 				</div>
 			</t>
 		</template>
-		<template id="triambulance_index">
+		<template id="ambulance_index">
 			<t t-call="website.layout">
 				<div class="container">
 					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
 						<h3>
-							Trimbulance details
+							Ambulance service details
 						</h3>
 						<thead>
 							<tr style="background:#DCDCDC">
@@ -519,7 +523,7 @@
 									<span t-field="l.phone" />
 								</td>
 								<td class="text-left" style="border: 1px solid black;">
-									<form action="/edittriambulance">
+									<form action="/editambulance">
 										<input name="post_id" t-att-value="l.id" type="hidden" />
 										<button type="submit" class="btn btn-primary">
 											Edit
@@ -897,7 +901,7 @@
 					<div class="container">
 						<div class="col-md-12">
 							<div class="alert alert-success">
-								oxygen created successfully.
+								JKT Oxygen Cylinder Issuance created successfully.
 							</div>
 						</div>
 					</div>
@@ -909,7 +913,7 @@
 				<div class="container">
 					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
 						<h3>
-							Oxygen details
+							JKT Oxygen Cylinder Issuance details
 						</h3>
 						<thead>
 							<tr style="background:#DCDCDC">
@@ -1822,7 +1826,7 @@
 					<div class="container">
 						<div class="col-md-12">
 							<div class="alert alert-success">
-								Waste disposal and sanitization create successfully.
+								Plasma Donor create successfully.
 							</div>
 						</div>
 					</div>
@@ -1834,7 +1838,7 @@
 				<div class="container">
 					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
 						<h3>
-							Waste disposal and sanitization details
+							Plasma Donor details
 						</h3>
 						<thead>
 							<tr style="background:#DCDCDC">
@@ -1890,5 +1894,1083 @@
 		</template>
 
 
+
+		<!-- ##################### -->
+
+		<template id="tmp_bloodinvestigation_form" name="bloodinvestigation Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/bloodinvestigation/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_bloodinvestigation_form_success" name="bloodinvestigation Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								Blood Investigation Labs create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="bloodinvestigation_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							Blood Investigation Labs details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/editbloodinvestigation">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+	
+
+
+
+		<!-- ##################### -->
+
+		<template id="tmp_emergencycontacts_form" name="emergencycontacts Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/emergencycontacts/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_emergencycontacts_form_success" name="emergencycontacts Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								District Emergency Contacts create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="emergencycontacts_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							District Emergency Contacts details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/editemergencycontacts">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+
+
+
+		<!-- ##################### -->
+
+		<template id="tmp_hphysician_form" name="hphysician Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/hphysician/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_hphysician_form_success" name="hphysician Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								Doctor for home isolation create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="hphysician_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							Doctor for home isolation details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/edithphysician">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+		<!-- ##################### -->
+
+		<template id="tmp_hrct_form" name="hrct Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/hrct/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_hrct_form_success" name="hrct Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								HRCT Test Centers create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="hrct_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							HRCT Test Centers details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/edithrct">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+	
+		<!-- ##################### -->
+
+		<template id="tmp_isolation_form" name="isolation Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/isolation/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_isolation_form_success" name="isolation Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								Isolation center create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="isolation_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							Isolation Centers details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/editisolation">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+	
+	
+		<!-- ##################### -->
+
+		<template id="tmp_oxra_form" name="oxra Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/oxra/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_oxra_form_success" name="oxra Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								Oxygen and Remdesivir create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="oxra_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							Oxygen and Remdesivir details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/editoxra">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
+
+	
+	
+		<!-- ##################### -->
+
+		<template id="tmp_rat_form" name="rat Form">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<form action="/rat/form/submit">
+								<div class="form-group">
+									<label for="name">
+										Name:
+									</label>
+									<t t-if="teacher">
+										<input name="post_id" t-att-value="teacher.id" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" t-att-value="teacher.name" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input name="post_id" value="" type="hidden" />
+										<input type="text" class="form-control" name="name" id="name" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="email">
+										Email address:
+									</label>
+									<t t-if="teacher">
+										<input type="email" class="form-control" name="email" id="email" t-att-value="teacher.email" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="email" class="form-control" name="email" id="email" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="phone">
+										Phone:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="phone" id="phone" t-att-value="teacher.phone" required="true" readonly="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="phone" id="phone" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Location:
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="location" id="location" t-att-value="teacher.street" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="location" id="location" required="true" />
+									</t>
+								</div>
+								<div class="form-group">
+									<label for="name">
+										Note
+									</label>
+									<t t-if="teacher">
+										<input type="text" class="form-control" name="ask" id="ask" t-att-value="teacher.ask" required="true" />
+									</t>
+									<t t-else="">
+										<input type="text" class="form-control" name="ask" id="ask" required="true" />
+									</t>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<t t-if="teacher">
+										Update
+									</t>
+									<t t-else="">
+										Create
+									</t>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="tmp_rat_form_success" name="rat Form Successfully Submitted">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="alert alert-success">
+								RAT Test Centers create successfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template>
+		<template id="rat_index">
+			<t t-call="website.layout">
+				<div class="container">
+					<table class="table table-condensed" style="border: 1px solid black;  font-size: 18px;float:left;width:300px;margin:0 0 10px 10px;">
+						<h3>
+							RAT Test Centers details
+						</h3>
+						<thead>
+							<tr style="background:#DCDCDC">
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Name
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Location
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Phone
+									</strong>
+								</th>
+								<th class="text-left" style="border: 1px solid black;">
+									<strong>
+										Note
+									</strong>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="color: #D8F0DA background: transparent">
+							<tr t-foreach="teachers" t-as="l">
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.name" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.street" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.phone" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<span t-field="l.ask" />
+								</td>
+								<td class="text-left" style="border: 1px solid black;">
+									<form action="/editrat">
+										<input name="post_id" t-att-value="l.id" type="hidden" />
+										<button type="submit" class="btn btn-primary">
+											Edit
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</template>
+	
 	</data>
 </odoo>
